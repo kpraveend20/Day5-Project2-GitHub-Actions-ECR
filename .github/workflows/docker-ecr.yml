@@ -1,0 +1,26 @@
+name: Docker Build and Push to ECR
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  docker-ecr:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Build Docker image
+        run: |
+          docker build -t day5-project2-ecr:latest .
+
+      - name: Test Docker image
+        run: |
+          docker run --rm day5-project2-ecr:latest
